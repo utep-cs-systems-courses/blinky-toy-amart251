@@ -11,14 +11,14 @@ AS              = msp430-elf-as
 all: buzzer.elf main.elf
 
 # additional rules for files
-buzzer.elf: ${COMMON_OBJECTS} buzzer.o buzzerMain.o ../lib/libTimer.a
+buzzer.elf: ${COMMON_OBJECTS} buzzer.o main.o ../lib/libTimer.a
 	${CC} ${CFLAGS} -o $@ $^
 
 main.elf: ${COMMON_OBJECTS} main.o ../lib/libTimer.a
 	${CC} ${CFLAGS} -o $@ $^
 
-load: buzzer.elf main.elf
-	msp430loader.sh $^
+load: button.elf main.elf
+	msp430loader.sh button.elf
 
 clean:
 	rm -f *.o *.elf
