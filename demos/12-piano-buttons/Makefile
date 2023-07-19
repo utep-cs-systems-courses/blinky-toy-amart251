@@ -17,7 +17,7 @@ buzzer.elf: ${COMMON_OBJECTS} buzzer.o main.o ../lib/libTimer.a
 main.elf: ${COMMON_OBJECTS} main.o ../lib/libTimer.a
 	${CC} ${CFLAGS} -o $@ $^
 
-load: button.elf main.elf
+load: main.elf
 	msp430loader.sh button.elf
 
 clean:
