@@ -1,24 +1,20 @@
+# makfile configuration
+COMMON_OBJECTS  = main.o
+CPU             = msp430g2553
+CFLAGS          = -mmcu=${CPU} -I../h
+LDFLAGS		= -L/opt/ti/msp430_gcc/include
 
-# Variables
-CC = msp430-gcc
-CFLAGS = -mmcu=msp430g2553
-SOURCES = main.c buzzer.c
-OBJECTS = $(SOURCES:.c=.o)
-TARGET = main.out
+#switch the compiler (for the internal make rules)
+CC              = msp430-elf-gcc
+AS              = msp430-elf-as
 
-# Default target
-all: $(TARGET)
+all: main.elf buzzer.elf
 
-# Compile source files into object files
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+main.elf: ${COMMON_OBJECTS}    ../lib/libTimer.a
+	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^ 
 
-# Link object files to produce the executable
-$(TARGET): $(OBJECTS)
-	$(CC) $(CFLAGS) $(OBJECTS) -o $(TARGET)
+load: main.elf
+	msp430loader.sh main.elf
 
-# Clean generated files
 clean:
-	rm -f $(OBJECTS) $(TARGET)
-
-.PHONY: all clean
+	rm -f *.o *.elf

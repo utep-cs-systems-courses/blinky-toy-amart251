@@ -7,7 +7,7 @@
 #define SW3 BIT2    /* switch3 is p2.2 */
 #define SW4 BIT3    /* switch4 is p2.3 */
 
-#define SWITCHES (SW1|SW2|SW3|SW4)   /* all switches on this board */
+#define SWITCHES SW1 SW2 SW3 SW4  /* all switches on this board */
 
 void main(void) 
 {  
