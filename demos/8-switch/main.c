@@ -5,7 +5,7 @@
 #define LED_GREEN BIT6             // P1.6
 #define LEDS (BIT0 | BIT6)
 
-#define SW1zz BIT3		/* switch1 is p1.3 */
+#define SW1 BIT3		/* switch1 is p1.3 */
 #define SWITCHES SW1		/* only 1 switch on this board */
 
 void main(void) 
