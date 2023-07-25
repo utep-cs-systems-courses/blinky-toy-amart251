@@ -33,7 +33,7 @@ switch_interrupt_handler()
   P2IES &= (p2val | ~SWITCHES);	/* if switch down, sense up */
 
 /* up=red, down=green */
-  if (p2val & SW1) {
+  if (p2val & SW2) {
     P2OUT |= LED_RED;
     P2OUT &= ~LED_GREEN;
   } else {
@@ -45,7 +45,7 @@ switch_interrupt_handler()
 
 /* Switch on P1 (S2) */
 void
-__interrupt_vec(PORT1_VECTOR) Port_2(){
+__interrupt_vec(PORT2_VECTOR) Port_2(){
   if (P2IFG & SWITCHES) {	      /* did a button cause this interrupt? */
     P2IFG &= ~SWITCHES;		      /* clear pending sw interrupts */
     switch_interrupt_handler();	/* single handler for all switches */
